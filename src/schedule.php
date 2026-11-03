@@ -6,7 +6,7 @@ final class ScheduledTask
 {
     public function __construct(
         public readonly string $name,
-        public readonly callable $callback,
+        public readonly  $callback,
         public readonly string $expression = '* * * * *',
         public ?\DateTime $lastRun = null,
         public ?\DateTime $nextRun = null,
