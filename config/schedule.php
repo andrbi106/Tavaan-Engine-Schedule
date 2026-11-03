@@ -2,20 +2,29 @@
 
 declare(strict_types=1);
 
-/*
- * تَوان | Tavaan — Schedule
- * config/schedule.php — پیکربندی زمان‌بندی (DOC-062 §5).
+/*|--------------------------------------------------------------------------
+ | Schedule Engine Configuration
+ |--------------------------------------------------------------------------
+ |
+ | پیکربندی موتور schedule — همهٔ کلیدهای مستندشده در `docs/03-engines/schedule.md` بخش «پیکربندی».
+ |
+ |@see https://github.com/Derogaramin/Tavaan-Doc/blob/main/docs/03-engines/schedule.md
  */
 
 return [
-    'timezone' => env_string('TVN_SCHEDULE_TZ', 'Asia/Tehran'),
+    /*| پیش‌فرض موتور (driver/store یا حالت فعال) */
+    'default' => env('SCHEDULE_DEFAULT', 'default'),
 
-    // فروشگاه cache برای mutex/onOneServer — '' = پیش‌فرض
-    // 🔒 در استقرار چندسروره باید store اشتراکی (redis/database) باشد
-    'cache_store' => env_string('TVN_SCHEDULE_CACHE', ''),
+    /*| کلید کش (در صورت استفاده) */
+    'prefix' => env('SCHEDULE_PREFIX', 'schedule:'),
 
-    'default_queue' => env_string('TVN_SCHEDULE_QUEUE', 'schedule'),
+    /*| تنظیمات لاگ */
+    'log' => [
+        'channel' => env('SCHEDULE_LOG_CHANNEL', 'schedule'),
+    ],
 
-    // اجرای وظایف حتی در maintenance mode
-    'run_in_maintenance' => env_bool('TVN_SCHEDULE_RUN_IN_MAINTENANCE', false),
+    /*| سایر کلیدها (طبق مستندات) */
+    'options' => [
+        // TODO: کلیدهای اضافی طبق سند §۶ (پیکربندی)
+    ],
 ];
