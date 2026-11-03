@@ -76,7 +76,7 @@ final class ScheduleServiceProvider
 
     public function call(/* ... */): mixed
     {
-        return null;
+        return new \Tavaan\Engine\Http\Response(200, "");
     }
     public function command(/* ... */): mixed
     {
