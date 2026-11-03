@@ -49,7 +49,8 @@ $c = new CronExpression("*/5 * * * *");
         // Scenario T-05
 $mgr = new ScheduleManager();
         $hit = 0;
-        $mgr->add(new ScheduledTask("t1", fn() => $hit++, "* * * * *"));
+        $hitRef = &$hit;
+        $mgr->add(new ScheduledTask("t1", function () use (&$hitRef) { $hitRef++; }, "* * * * *"));
         $now = new \DateTime();
         $mgr->runDue($now);
         $this->assertSame(1, $hit);
