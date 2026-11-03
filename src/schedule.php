@@ -74,23 +74,23 @@ final class ScheduleServiceProvider
     public function provides(): array { return [ScheduleManager::class, ScheduledTask::class]; }
     public function getManager(): ScheduleManager { if ($this->manager === null) $this->register(); return $this->manager; }
 
-    public function call(/* ... */): mixed
-    {
-        return new \Tavaan\Engine\Http\Response(200, "");
-    }
-    public function command(/* ... */): mixed
+    public function call()
     {
         return null;
     }
-    public function events(/* ... */): mixed
+    public function command()
     {
         return null;
     }
-    public function exec(/* ... */): mixed
+    public function events()
     {
         return null;
     }
-    public function job(/* ... */): mixed
+    public function exec()
+    {
+        return null;
+    }
+    public function job()
     {
         return null;
     }

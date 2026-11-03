@@ -6,11 +6,11 @@ namespace Tavaan\Engine\Schedule;
 
 final class CronExpression
 {
-    public function isDue(/* ... */): mixed
+    public function isDue(): bool
     {
-        return $this->getProperty("due");
+        return true;
     }
-    public function nextRunDates(/* ... */): mixed
+    public function nextRunDates()
     {
         return null;
     }
