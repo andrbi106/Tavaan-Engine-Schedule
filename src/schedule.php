@@ -73,4 +73,25 @@ final class ScheduleServiceProvider
     public function boot(): void {}
     public function provides(): array { return [ScheduleManager::class, ScheduledTask::class]; }
     public function getManager(): ScheduleManager { if ($this->manager === null) $this->register(); return $this->manager; }
+
+    public function call(/* ... */): mixed
+    {
+        return null;
+    }
+    public function command(/* ... */): mixed
+    {
+        return null;
+    }
+    public function events(/* ... */): mixed
+    {
+        return null;
+    }
+    public function exec(/* ... */): mixed
+    {
+        return null;
+    }
+    public function job(/* ... */): mixed
+    {
+        return null;
+    }
 }
