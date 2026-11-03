@@ -1,2 +1,2 @@
 <?php
-return return ['error_schedule' => 'خطا در زمان‌بندی.'];;
+return ['error_schedule' => 'خطا در زمان‌بندی.'];
