@@ -8,7 +8,7 @@ final class CronExpression
 {
     public function isDue(/* ... */): mixed
     {
-        return null;
+        return $this->getProperty("due");
     }
     public function nextRunDates(/* ... */): mixed
     {
