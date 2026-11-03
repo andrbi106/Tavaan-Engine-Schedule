@@ -15,4 +15,43 @@ use Tavaan\Engine\Schedule\ScheduledTask;
  * Generated from ROADMAP.md scenarios — real implementations, not placeholders.
  */
 final class ScheduleScenarioTest extends TestCase
-{'    public function t01_cron_every_minute_matches(): void\n    {\n        // Scenario T-01\n$c = new CronExpression("* * * * *");\n        $this->assertTrue($c->isDue(new \\DateTime("2026-11-04 12:00:00")));\n    }\n    public function t02_cron_5_minute_step(): void\n    {\n        // Scenario T-02\n$c = new CronExpression("*/5 * * * *");\n        $this->assertTrue($c->isDue(new \\DateTime("2026-11-04 12:00:00")));\n        $this->assertTrue($c->isDue(new \\DateTime("2026-11-04 12:05:00")));\n        $this->assertFalse($c->isDue(new \\DateTime("2026-11-04 12:03:00")));\n    }\n    public function t03_cron_hourly(): void\n    {\n        // Scenario T-03\n$c = new CronExpression("0 * * * *");\n        $this->assertTrue($c->isDue(new \\DateTime("2026-11-04 12:00:00")));\n        $this->assertFalse($c->isDue(new \\DateTime("2026-11-04 12:30:00")));\n    }\n    public function t04_next_run_dates_returns_count(): void\n    {\n        // Scenario T-04\n$c = new CronExpression("*/5 * * * *");\n        $dates = $c->nextRunDates(3);\n        $this->assertCount(3, $dates);\n    }\n    public function t05_schedule_manager_add_run(): void\n    {\n        // Scenario T-05\n$mgr = new ScheduleManager();\n        $hit = 0;\n        $mgr->add(new ScheduledTask("t1", fn() => $hit++, "* * * * *"));\n        $now = new \\DateTime();\n        $mgr->runDue($now);\n        $this->assertSame(1, $hit);\n    }'}
+{
+    public function t01_cron_every_minute_matches(): void
+    {
+        // Scenario T-01
+$c = new CronExpression("* * * * *");
+        $this->assertTrue($c->isDue(new \DateTime("2026-11-04 12:00:00")));
+    }
+    public function t02_cron_5_minute_step(): void
+    {
+        // Scenario T-02
+$c = new CronExpression("*/5 * * * *");
+        $this->assertTrue($c->isDue(new \DateTime("2026-11-04 12:00:00")));
+        $this->assertTrue($c->isDue(new \DateTime("2026-11-04 12:05:00")));
+        $this->assertFalse($c->isDue(new \DateTime("2026-11-04 12:03:00")));
+    }
+    public function t03_cron_hourly(): void
+    {
+        // Scenario T-03
+$c = new CronExpression("0 * * * *");
+        $this->assertTrue($c->isDue(new \DateTime("2026-11-04 12:00:00")));
+        $this->assertFalse($c->isDue(new \DateTime("2026-11-04 12:30:00")));
+    }
+    public function t04_next_run_dates_returns_count(): void
+    {
+        // Scenario T-04
+$c = new CronExpression("*/5 * * * *");
+        $dates = $c->nextRunDates(3);
+        $this->assertCount(3, $dates);
+    }
+    public function t05_schedule_manager_add_run(): void
+    {
+        // Scenario T-05
+$mgr = new ScheduleManager();
+        $hit = 0;
+        $mgr->add(new ScheduledTask("t1", fn() => $hit++, "* * * * *"));
+        $now = new \DateTime();
+        $mgr->runDue($now);
+        $this->assertSame(1, $hit);
+    }
+}
