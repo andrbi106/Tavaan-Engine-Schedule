@@ -7,18 +7,18 @@ namespace Tavaan\Engine\Schedule\Console;
 use Tavaan\Core\Contracts\Console\CommandInterface;
 
 /**
- * schedule:list command.
+ * schedule:run command.
  */
-final class Schedule_listCommand implements CommandInterface
+final class ScheduleRunCommand implements CommandInterface
 {
     public function name(): string
     {
-        return 'schedule:list';
+        return 'schedule:run';
     }
 
     public function description(): string
     {
-        return 'Run schedule:list (TODO: fill description).';
+        return 'Run schedule:run (TODO: fill description).';
     }
 
     public function handle(array $args = []): int
