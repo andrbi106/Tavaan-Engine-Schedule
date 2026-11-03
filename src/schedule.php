@@ -74,24 +74,30 @@ final class ScheduleServiceProvider
     public function provides(): array { return [ScheduleManager::class, ScheduledTask::class]; }
     public function getManager(): ScheduleManager { if ($this->manager === null) $this->register(); return $this->manager; }
 
-    public function call()
+    public function call(string $name, callable $callback, string $cron = '* * * * *'): self
     {
-        return null;
+        $this->getManager()->add(new ScheduledTask($name, $callback, $cron));
+        return $this;
     }
-    public function command()
+    public function command(string $name, string $command, string $cron = '* * * * *'): self
     {
-        return null;
+        $this->getManager()->add(new ScheduledTask($name, function () use ($command) {
+            return shell_exec($command);
+        }, $cron));
+        return $this;
     }
-    public function events()
+    public function events(\DateTime $now = null): array
     {
-        return null;
+        $now ??= new \DateTime();
+        return $this->getManager()->runDue($now);
     }
-    public function exec()
+    public function exec(string $name, string $cmd, string $cron = '* * * * *'): self
     {
-        return null;
+        return $this->command($name, $cmd, $cron);
     }
-    public function job()
+    public function job(string $name, mixed $job, string $cron = '* * * * *'): self
     {
-        return null;
+        $this->getManager()->add(new ScheduledTask($name, $job, $cron));
+        return $this;
     }
 }
