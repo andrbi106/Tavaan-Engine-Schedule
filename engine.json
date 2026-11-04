@@ -40,5 +40,6 @@
     "accessor": "schedule"
   },
   "docs": "docs/03-engines/schedule.md",
-  "notes": "M5 — Cron Expression Parser خودنوشته (۵ فیلد + OR کلاسیک DOM/DOW)، Fluent API، Overlap Prevention با mutex اتمیک، onOneServer، runInBackground. فقط یک entry در crontab: schedule:run."
+  "notes": "M5 — Cron Expression Parser خودنوشته (۵ فیلد + OR کلاسیک DOM/DOW)، Fluent API، Overlap Prevention با mutex اتمیک، onOneServer، runInBackground. فقط یک entry در crontab: schedule:run.",
+  "class": "Tavaan\\Engine\\Schedule\\ScheduleEngine"
 }

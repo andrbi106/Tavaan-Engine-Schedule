@@ -2,6 +2,8 @@
 
 > **زمان‌بندی** — موتور Schedule در فریمورک تَوان
 
+این موتور از کلاس پایهٔ `Engine` (در [Tavaan-Engine-Core](https://github.com/andrbi106/Tavaan-Engine-Core)) ارث می‌برد.
+
 ## مشخصات
 
 | فیلد | مقدار |
@@ -11,73 +13,71 @@
 | عنوان فارسی | زمان‌بندی |
 | نسخه | `0.1.0` |
 | namespace | `Tavaan\Engine\Schedule` |
-| نوع | `engine` |
-| Facade | `Schedule` (accessor: `schedule`) |
+| کلاس موتور | `Tavaan\Engine\Schedule\ScheduleEngine` |
+| Facade | Schedule (`schedule`) |
+
+## کلاس موتور
+
+```php
+namespace Tavaan\Engine\Schedule;
+
+use Tavaan\EngineCore\Engine as BaseEngine;
+use Tavaan\EngineCore\Contracts\EngineManifestInterface;
+
+final class ScheduleEngine extends BaseEngine
+{
+    public function __construct(EngineManifestInterface $manifest)
+    {
+        parent::__construct($manifest);
+    }
+
+    public function register(ContainerInterface $container): void
+    {
+        parent::register($container);
+        // bindingهای اختصاصی موتور
+    }
+
+    public function boot(): void
+    {
+        parent::boot();
+    }
+}
+```
+
+**فایل:** `src/ScheduleEngine.php`
 
 ## توضیحات
 
 M5 — Cron Expression Parser خودنوشته (۵ فیلد + OR کلاسیک DOM/DOW)، Fluent API، Overlap Prevention با mutex اتمیک، onOneServer، runInBackground. فقط یک entry در crontab: schedule:run.
 
-## خطاها (Exceptions)
+## وابستگی‌ها
 
-- `Tavaan\Engine\Schedule\Exceptions\InvalidCronException`
+**موتورهای مورد‌نیاز:** `config`, `console`
 
-## Facadeها
-
-- `Tavaan\Engine\Schedule\Facades\Schedule`
-
-## کلاس‌های اصلی
-
-- `src/Console/ScheduleListCommand.php`
-- `src/Console/ScheduleRunCommand.php`
-- `src/CronExpression.php`
-- `src/ScheduleEvent.php`
-- `src/schedule.php`
+**موتورهای اختیاری:** `cache`, `queue`, `log`
 
 ## Service Providerها
 
 - `Tavaan\Engine\Schedule\ScheduleManagerServiceProvider`
-
-## وابستگی‌ها
-
-**موتورهای مورد‌نیاز:**
-
-- `config`
-- `console`
-
-**موتورهای اختیاری:**
-
-- `cache`
-- `queue`
-- `log`
 
 ## دستورات CLI
 
 - `schedule:run`
 - `schedule:list`
 
-## پیکربندی
+## سه درگاه ارتباط با سایر موتورها
 
-- فایل پیکربندی: `config/schedule.php`
-- کلید: `schedule`
+| درگاه | الگو | متدهای convenience |
+|---|---|---|
+| Container | pull-based DI | `make()`, `bound()` |
+| Events | pub/sub | `dispatch()`, `listen()` |
+| EngineBus | point-to-point RPC | `call()`, `offer()` |
 
 ## نصب
 
 ```bash
 git clone https://github.com/andrbi106/Tavaan-Engine-Schedule.git
 ```
-
-این موتور بخشی از فریمورک تَوان است و معمولاً به‌صورت مستقیم نصب نمی‌شود،
-بلکه توسط [Tavaan-Core](https://github.com/andrbi106/Tavaan-Core) مدیریت می‌شود.
-
-## روابط با سایر مخازن
-
-| مخزن | نقش |
-|---|---|
-| **`andrbi106/Tavaan-Engine-Schedule`** (این مخزن) | موتور Schedule |
-| `andrbi106/Tavaan-Engine-Core` | ساختار پایه + درگاه ارتباط موتورها |
-| `andrbi106/Tavaan-Core` | اسکلت اپلیکیشن + همهٔ موتورها |
-| `Derogaramin/Tavaan-Framework` | فریمورک مادر (monorepo) |
 
 ## مجوز
 
